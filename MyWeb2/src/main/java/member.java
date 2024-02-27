@@ -1,9 +1,5 @@
-
-
 import java.io.IOException;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -70,6 +66,19 @@ public class member extends HttpServlet {
 			mbService.SignUp(MemberDTO);
 			response.sendRedirect(request.getContextPath());
 		}
+		
+		if (action.equals("/isValidID.do")) {
+			MemberDTO.setId(request.getParameter("id"));
+			
+            boolean IDresult = mbService.isValidID(MemberDTO);
+            System.out.println(IDresult);
+            
+			if (IDresult) {
+				System.out.println(MemberDTO.getId());
+				response.getWriter().print("valid");
+			} else {
+				response.getWriter().print("invalid");
+			}
+        }
 	}
-
 }

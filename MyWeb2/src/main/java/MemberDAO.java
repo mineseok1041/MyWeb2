@@ -74,7 +74,7 @@ public class MemberDAO {
 			pstmt.setString(3, name);
 			pstmt.setString(4, email);
 			pstmt.executeUpdate();
-			System.out.println("addmember : " + id + pw + name + email);
+			System.out.println("addmember : " + id + " " + pw +  " " + name +  " " + email);
 			
 			pstmt.close();
 		} catch (Exception e) {
@@ -87,7 +87,6 @@ public class MemberDAO {
 			con = dataFactory.getConnection();
 			
 			String query = "delete from MyWebUser_t" + " where id=?";
-			System.out.println("prepareStatememt:" + query);
 			
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, id);
@@ -103,20 +102,30 @@ public class MemberDAO {
 		boolean result = false;
 		String id = memberDTO.getId();
 		String pw = memberDTO.getPw();
-		System.out.println(id);
-		System.out.println(pw);
+		
 		try {
 			con = dataFactory.getConnection();
 			String query = "select decode(count(*),1,'true','false') as result from mywebuser_t";
-			query += " where id=? and pw=?";
-			System.out.println(query);
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, id);
-			pstmt.setString(2, pw);
-			ResultSet rs = pstmt.executeQuery();
-			System.out.println(query);
-			rs.next();
-			result = Boolean.parseBoolean(rs.getString("result"));
+			
+			if (id != null && pw != null) {
+				query += " where id=? and pw=?";
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, id);
+				pstmt.setString(2, pw);
+				ResultSet rs = pstmt.executeQuery();
+				rs.next();
+				result = Boolean.parseBoolean(rs.getString("result"));
+			} else if (id != null && pw ==null) {
+				query += " where id=?";
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, id);
+				ResultSet rs = pstmt.executeQuery();
+				rs.next();
+				result = Boolean.parseBoolean(rs.getString("result"));
+			} else {
+				result = false;
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -150,8 +159,6 @@ public class MemberDAO {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
-        }
-        
+        }  
     }
 }
-

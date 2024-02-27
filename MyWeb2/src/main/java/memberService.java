@@ -25,4 +25,9 @@ public class memberService {
 	public void SignUp(MemberDTO MemberDTO) {
 		MemberDAO.addMember(MemberDTO);
     }
+	
+	public boolean isValidID(MemberDTO MemberDTO) {
+		boolean result = MemberDAO.isExisted(MemberDTO);
+		return !result;
+	}
 }
