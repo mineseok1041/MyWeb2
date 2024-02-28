@@ -71,7 +71,6 @@ public class member extends HttpServlet {
 			MemberDTO.setId(request.getParameter("id"));
 			
             boolean IDresult = mbService.isValidID(MemberDTO);
-            System.out.println(IDresult);
             
 			if (IDresult) {
 				System.out.println(MemberDTO.getId());
