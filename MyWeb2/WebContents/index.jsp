@@ -14,6 +14,7 @@
 
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="qcss/index.css" />
 <title>Main page</title>
 </head>
 
@@ -33,29 +34,7 @@
 	</c:if>
 	
 	<style>
-        body {
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        a {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 5px;
-            text-decoration: none;
-            color: #fff;
-            background-color: #4caf50;
-            border-radius: 5px;
-        }
-
-        a:hover {
-            background-color: #45a049;
-        }
+        
     </style>
 </body>
 
