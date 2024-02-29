@@ -1,6 +1,8 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -79,4 +81,38 @@ public class BlogDAO {
 			return null;
 		}
 	}
+	
+	public List<BlogDTO> getBlogList() {
+		try {
+			con = dataFactory.getConnection();
+
+			String query = "select * from blog_t order by blogNum desc";
+			pstmt = con.prepareStatement(query);
+			ResultSet rs = pstmt.executeQuery();
+
+			List<BlogDTO> BlogList = new ArrayList<BlogDTO>();
+			
+			while (rs.next()) {
+				BlogDTO BlogDTO = new BlogDTO();
+				BlogDTO.setBlogNum(rs.getInt("blogNum"));
+				BlogDTO.setTitle(rs.getString("title"));
+				//BlogDTO.setContents(rs.getString("contents"));
+				BlogDTO.setWriter(rs.getString("writer"));
+				BlogDTO.setWriteDate(rs.getDate("writeDate"));
+
+				BlogList.add(BlogDTO);
+			}
+
+			rs.close();
+			pstmt.close();
+			con.close();
+
+			return BlogList;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
 }

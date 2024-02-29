@@ -9,6 +9,7 @@
 <c:url var="logoutUrl" value="/member/logout.do" />
 <c:url var="signupUrl" value="/signup.jsp" />
 <c:url var="writeBlogUrl" value="/writeBlog.jsp" />
+<c:url var="blogListUrl" value="/blog/blogList.do" />
 
 <!DOCTYPE html>
 <html>
@@ -25,14 +26,16 @@
 	<!-- 로그인이 안되어 있을 때 -->
 	<c:if test="${empty id}">
 		<a href="${loginUrl}">로그인</a>
-		<a href="${signupUrl}">회원가입</a>
+		<a href="${signupUrl}">회원가입</a><br>
+		<a href="${blogListUrl}">블로그 목록</a>
 	</c:if>
 	
 	<!-- 로그인이 되어 있을 때 -->
 	<c:if test="${not empty id}">
         ${name}님 환영합니다.<br>
         <a href="${writeBlogUrl}">글쓰기</a>
-		<a href="${logoutUrl}">로그아웃</a>
+		<a href="${logoutUrl}">로그아웃</a><br>
+		<a href="${blogListUrl}">블로그 목록</a>
 	</c:if>
 </body>
 

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 
-<link rel="stylesheet" type="text/css" href="css/test.css">
+<link rel="stylesheet" type="text/css" href="qcss/test.css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="js/signup.js"></script>
 

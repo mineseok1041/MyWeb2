@@ -11,7 +11,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/login.css" />
+	<link rel="stylesheet" type="text/css" href="qcss/login.css" />
 	<title>Login Page</title>
 </head>
 
