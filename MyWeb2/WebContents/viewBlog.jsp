@@ -17,13 +17,15 @@
 <title>viewBlog Page</title>
 </head>
 <body>
-<div>
-	<h1>${BlogDTO.title}</h1>
-	<p>${BlogDTO.writer} ${BlogDTO.writeDate}</p>
+
+<h1>${BlogDTO.title}</h1><br>
+작성자: ${BlogDTO.writer} ${BlogDTO.writeDate}
+
+<div class="contents">
+	${BlogDTO.contents}
 </div>
-<div>
-	<p>${BlogDTO.contents}</p>
-</div>
+
+
 <a href="${contextPath}/blog/blogList.do">목록으로</a>
 
 </body>

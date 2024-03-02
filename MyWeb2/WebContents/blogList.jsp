@@ -22,8 +22,8 @@
 	<a href="${contextPath}">홈으로</a>
 	<table class="table">
 		<tr class="contype">
-			<td class="title">제목</td>
-			<td class="writer">작성자</td>
+			<td class="title" width="400px">제목</td>
+			<td class="writer" width="200px">작성자</td>
 			<td class="date">작성일</td>
 		</tr>
 		<tr>
@@ -41,10 +41,12 @@
 				</tr>
 			</c:forEach>
 			</c:if>
-			
 		</tr>
 	</table>
-
+	<form name="search" method="get" action="${contextPath}/blog/blogSearch.do">
+		<input type="search" name="search" placeholder="검색어를 입력하세요">
+		<input type="submit" value="검색">
+	</form>
 	
 	
 	

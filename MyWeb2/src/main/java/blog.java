@@ -57,10 +57,19 @@ public class blog extends HttpServlet {
 		}
 
 		if (action.equals("/blogList.do")) {
-			BlogList = blogService.getBlogList();
+			BlogList = blogService.getBlogList(10, true, null);
 
 			request.setAttribute("BlogList", BlogList);
 			request.getRequestDispatcher("/blogList.jsp").forward(request, response);
+		}
+		
+		if (action.equals("/blogSearch.do")) {
+			String search = request.getParameter("search");
+			
+            BlogList = blogService.getBlogList(10, true, search);
+            
+            request.setAttribute("BlogList", BlogList);
+            request.getRequestDispatcher("/blogList.jsp").forward(request, response);
 		}
 	}
 }

@@ -11,9 +11,9 @@ public class blogService {
 		BlogDAO.addBlog(BlogDTO);
 	}
 	
-	public List<BlogDTO> getBlogList() {
+	public List<BlogDTO> getBlogList(int max, boolean isDesc, String search) {
 		List<BlogDTO> BlogList = new ArrayList<BlogDTO>();
-		BlogList = BlogDAO.getBlogList();
+		BlogList = BlogDAO.getBlogList(max, isDesc, search);
 		
 		return BlogList;
 	}

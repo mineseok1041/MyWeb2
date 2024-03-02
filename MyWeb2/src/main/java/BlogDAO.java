@@ -82,21 +82,35 @@ public class BlogDAO {
 		}
 	}
 	
-	public List<BlogDTO> getBlogList() {
+	public List<BlogDTO> getBlogList(int max, boolean isDesc, String search) {
 		try {
 			con = dataFactory.getConnection();
 
-			String query = "select * from blog_t order by blogNum desc";
+			String query = "select * from ( select * from blog_t";
+			if (search != null) {
+				query += " where (title||contents||writer) like '%" + search + "%'";
+			}
+			if (isDesc) {
+				query += " order by blogNum desc";
+			} else {
+				query += " order by blogNum asc";
+			}
+			query += " ) where rownum <= ?";
+			
+			System.out.println(query);
+			
 			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, max);
+		
 			ResultSet rs = pstmt.executeQuery();
 
 			List<BlogDTO> BlogList = new ArrayList<BlogDTO>();
 			
 			while (rs.next()) {
 				BlogDTO BlogDTO = new BlogDTO();
+				
 				BlogDTO.setBlogNum(rs.getInt("blogNum"));
 				BlogDTO.setTitle(rs.getString("title"));
-				//BlogDTO.setContents(rs.getString("contents"));
 				BlogDTO.setWriter(rs.getString("writer"));
 				BlogDTO.setWriteDate(rs.getDate("writeDate"));
 
