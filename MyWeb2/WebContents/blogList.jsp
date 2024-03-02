@@ -14,16 +14,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Blog List Page</title>
+<link rel="stylesheet" type="text/css" href="${contextPath}/qcss/blogList.css">
 </head>
 
 <body>
 	<h1>Blog List Page</h1>
 	<a href="${contextPath}">홈으로</a>
-	<table border="1">
-		<tr>
-			<td>제목</td>
-			<td>작성자</td>
-			<td>작성일</td>
+	<table class="table">
+		<tr class="contype">
+			<td class="title">제목</td>
+			<td class="writer">작성자</td>
+			<td class="date">작성일</td>
 		</tr>
 		<tr>
 			<c:if test="${empty BlogList}">

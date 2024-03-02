@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -64,7 +65,10 @@ public class member extends HttpServlet {
 			MemberDTO.setEmail(request.getParameter("email"));
 
 			mbService.SignUp(MemberDTO);
-			response.sendRedirect(request.getContextPath());
+			PrintWriter out = response.getWriter();
+			out.print("<script>alert('회원가입 되었습니다.'); location.href='");
+			out.print(request.getContextPath());
+			out.print("';</script>");
 		}
 		
 		if (action.equals("/isValidID.do")) {
