@@ -10,6 +10,7 @@
 <c:url var="signupUrl" value="/signup.jsp" />
 <c:url var="writeBlogUrl" value="/writeBlog.jsp" />
 <c:url var="blogListUrl" value="/blog/blogList.do" />
+<c:url var="myBlogList" value="/blog/myBlogList.do" />
 
 <!DOCTYPE html>
 <html>
@@ -36,6 +37,7 @@
         <a href="${writeBlogUrl}">글쓰기</a>
 		<a href="${logoutUrl}">로그아웃</a><br>
 		<a href="${blogListUrl}">블로그 목록</a>
+		<a href="${myBlogList}">내 블로그 목록</a>
 	</c:if>
 </body>
 

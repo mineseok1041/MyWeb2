@@ -18,6 +18,13 @@ public class blogService {
 		return BlogList;
 	}
 	
+	public List<BlogDTO> getmyBlogList(int max, boolean isDesc, String ID) {
+		List<BlogDTO> BlogList = new ArrayList<BlogDTO>();
+		BlogList = BlogDAO.getmyBlogList(max, isDesc, ID);
+		
+		return BlogList;
+	} 
+	
 	public BlogDTO getBlogInfo(BlogDTO BlogDTO) {
 		return BlogDAO.getBlogInfo(BlogDTO);
 	}

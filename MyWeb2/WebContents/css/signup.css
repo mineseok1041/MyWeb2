@@ -1,67 +1,12 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+@charset "UTF-8";
+
+.input {
+	width: 400px;
 }
 
-form {
-    width: 300px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    box-sizing: border-box;
+.id:valid,
+.pw:valid,
+.name:valid,
+.email:valid {
+	outline: 2px solid #87d152;
 }
-
-table {
-    width: 100%;
-}
-
-td {
-    padding: 10px;
-}
-
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="submit"],
-input[type="button"] {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-}
-
-input[type="submit"]:disabled,
-input[type="button"] {
-    background-color: #ccc;
-    color: #666;
-    cursor: not-allowed;
-}
-
-input[type="submit"]:enabled {
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-}
-
-#idValidMsg {
-    color: red;
-}
-
-#idMsg,
-#pwMsg,
-#pwcMsg,
-#nameMsg,
-#emailMsg {
-    color: red;
-    font-size: 12px;
-    display: block;
-    margin-top: 5px;
-}
-

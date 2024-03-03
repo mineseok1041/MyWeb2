@@ -29,7 +29,7 @@ public class member extends HttpServlet {
 		
 		memberService mbService = new memberService();
 		MemberDTO MemberDTO = new MemberDTO();
-
+		
 		String action = request.getPathInfo();
 		
 		if (action.equals("/login.do")) {
@@ -44,7 +44,6 @@ public class member extends HttpServlet {
 				session.setAttribute("name", MemberDTO.getName());
 				
 				response.sendRedirect(request.getContextPath());
-
 			} else {
 				System.out.println("로그인 실패");
 				session.setAttribute("LoginErr", "true");
@@ -73,11 +72,11 @@ public class member extends HttpServlet {
 		
 		if (action.equals("/isValidID.do")) {
 			MemberDTO.setId(request.getParameter("id"));
+			System.out.println(MemberDTO.getId());
 			
             boolean IDresult = mbService.isValidID(MemberDTO);
             
 			if (IDresult) {
-				System.out.println(MemberDTO.getId());
 				response.getWriter().print("valid");
 			} else {
 				response.getWriter().print("invalid");

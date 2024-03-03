@@ -6,6 +6,7 @@ public class BlogDTO {
 	private String contents;
 	private String writer;
 	private Date writeDate;
+	private String writerID;
 	
 	public BlogDTO() {
 	}
@@ -63,5 +64,13 @@ public class BlogDTO {
 	
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
+	}
+	
+	public String getWriterID() {
+		return writerID;
+	}
+	
+	public void setWriterID(String writerID) {
+		this.writerID = writerID;
 	}
 }

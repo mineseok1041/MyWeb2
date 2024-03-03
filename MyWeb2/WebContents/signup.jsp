@@ -8,7 +8,7 @@
 
 <link rel="stylesheet" type="text/css" href="css/signup.css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="js/signup.js"></script>
+<script type="text/javascript" src="js/signup.js"></script>
 
 <title>SignUp Page</title>
 </head>
@@ -18,49 +18,38 @@
 		<table>
 			<tr>
 				<td>아이디</td>
-				<td><input type="text" name="id" id="id"
+				<td><input type="text" name="id" id="id" class="id"
+							oninput="Idchange()"
 							autoFocus
-							placeholder="첫글자는 영문자, 나머지는 영문자, 숫자로 4~12자리"
-							required 
-							pattern="^[a-zA-Z][0-9a-zA-Z]{4,12}$"
-				            oninvalid="this.setCustomValidity('아이디를 다시 입력하세요')"></td>
-							<!-- 첫글자는 영문자, 나머지는 영문자, 숫자로 4~12자리 -->
+							placeholder="영문자, 숫자로 4~12자리"
+							required
+							pattern="^[0-9a-zA-Z]{3,12}$"></td>
+							<!-- 영문자, 숫자로 3~12자리 -->
 				<td><input type="button" value="중복확인" onclick="isValidID()"></td>
 				<td><span id="idValidMsg"></span></td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><input type="password" name="pw" id="pw"
+				<td><input type="password" name="pw" id="pw" class="pw"
 				            placeholder="영문자, 숫자로 4~12자리"
 							required
-							pattern="^[0-9a-zA-Z*#!]{4,12}$"
-							oninvalid="this.setCustomValidity('비밀번호를 다시 입력하세요')"></td>
+							pattern="^[0-9a-zA-Z*#!]{4,12}$"></td>
 							<!-- 영문자, 숫자, *#!로 4~12자리 -->
 			</tr>
 			<tr>
-				<td>비밀번호 확인</td>
-				<td><input type="password" name="pwc" id="pwc"
-				            placeholder="비밀번호와 일치해야 합니다"
-							required
-							pattern="^[0-9a-zA-Z*#!]{4,12}$"
-							oninvalid="this.setCustomValidity('비밀번호가 일치하지 않습니다')"></td>
-							<!-- 영문자, 숫자로 4~12자리 -->
-			</tr>
-			<tr>
 				<td>이름</td>
-				<td><input type="text" name="name" id="name"
+				<td><input type="text" name="name" id="name" class="name"
 				            placeholder="ex) 홍길동"
 							required
-							pattern="^[가-힣a-zA-Z]{1,10}$"
-				            oninvalid="this.setCustomValidity('이름을 다시 입력하세요')"></td>
+							pattern="^[가-힣a-zA-Z]{1,10}$"></td>
 							<!-- 한글, 영문자로 1~10자리 -->
 			</tr>
 			<tr>
 				<td>이메일</td>
-				<td><input type="email" name="email" id="email"
+				<td><input type="text" name="email" id="email" class="email"
 				            placeholder="ex) test@example.com"
 							required
-							oninvalid="this.setCustomValidity('이메일을 다시 입력하세요')"></td>
+							pattern="^[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.][a-zA-Z]{1,5}$"></td>
 			</tr>
 			<tr>
 				<td><input type="submit" name="submit" id="submit" disabled value="회원가입"></td>

@@ -7,18 +7,18 @@
 	request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="name" value="${sessionScope.name}" />
 
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
-<title>Blog List Page</title>
+<title>My Blog List Page</title>
 </head>
-
 <body>
-	<h1>Blog List Page</h1>
+	<h1>My Blog List Page</h1>
 	<a href="${contextPath}">홈으로</a>
+	${name}님의 블로그 목록
 	<table class="table">
 		<tr class="contype">
 			<td class="title" width="400px">제목</td>
@@ -42,9 +42,10 @@
 			</c:if>
 		</tr>
 	</table>
-	<form name="search" method="get" action="${contextPath}/blog/blogSearch.do">
+	<form name="search" method="get" action="${contextPath}/blog/myblogSearch.do">
 		<input type="search" name="search" placeholder="검색어를 입력하세요">
 		<input type="submit" value="검색">
-	</form>	
+	</form>
+	 
 </body>
 </html>

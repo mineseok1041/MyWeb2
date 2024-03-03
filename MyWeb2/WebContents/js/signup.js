@@ -1,5 +1,13 @@
+var ValidID = false;
+
 function SubmitCheck() {
-	document.signup.submit.disabled = !document.forms.signup.checkValidity();
+	document.signup.submit.disabled = !(ValidID && document.forms.signup.checkValidity());
+}
+
+function Idchange() {
+	ValidID = false;
+	$("#idValidMsg").html("");
+	SubmitCheck();
 }
 
 function isValidID() {
@@ -14,8 +22,12 @@ function isValidID() {
 		success: function(data) {
 			if (data === "valid") {
 				$("#idValidMsg").html("사용가능한 아이디입니다");
+				ValidID = true;
+				SubmitCheck();
 			} else if (data === "invalid") {
 				$("#idValidMsg").html("이미 사용중인 아이디입니다");
+				ValidID = false;
+				SubmitCheck();
 			}
 		}
 	});

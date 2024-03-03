@@ -2,8 +2,6 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-
 <c:set var="LoginErr" value="${sessionScope.LoginErr}" />
 
 <!DOCTYPE html>
@@ -11,7 +9,6 @@
 
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="qcss/login.css" />
 	<title>Login Page</title>
 </head>
 

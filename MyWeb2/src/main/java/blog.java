@@ -28,6 +28,7 @@ public class blog extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
 
 		blogService blogService = new blogService();
 		BlogDTO BlogDTO = new BlogDTO();
@@ -44,10 +45,10 @@ public class blog extends HttpServlet {
 				BlogDTO.setWriter(loginName);
 				BlogDTO.setTitle(request.getParameter("title"));
 				BlogDTO.setContents(request.getParameter("contents"));
+				BlogDTO.setWriterID(loginID);
 
 				blogService.addBlog(BlogDTO);
 
-				PrintWriter out = response.getWriter();
 				out.print("<script>alert('새 글이 등록되었습니다.'); location.href='");
 				out.print(request.getContextPath());
 				out.print("';</script>");
@@ -70,6 +71,22 @@ public class blog extends HttpServlet {
             
             request.setAttribute("BlogList", BlogList);
             request.getRequestDispatcher("/blogList.jsp").forward(request, response);
+		}
+		
+		if (action.equals("/myBlogList.do")) {
+			HttpSession session = request.getSession();
+			String loginID = (String) session.getAttribute("id");
+			
+			if (loginID == null) {
+				out.print("<script>alert('로그인이 필요합니다.'); location.href='");
+				out.print(request.getContextPath());
+				out.print("/login.jsp';</script>");
+			} else {
+				BlogList = blogService.getmyBlogList(10, true, loginID);
+
+				request.setAttribute("BlogList", BlogList);
+				request.getRequestDispatcher("/myBlogList.jsp").forward(request, response);
+			}
 		}
 	}
 }
