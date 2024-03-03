@@ -35,7 +35,13 @@ public class blog extends HttpServlet {
 		List<BlogDTO> BlogList = new ArrayList<BlogDTO>();
 
 		String action = request.getPathInfo();
-
+		String[] actionSeg = action.split("/");
+		String action2 = (String)actionSeg[1];
+		int blogId = 0;
+		if (actionSeg.length == 3) {
+			blogId = Integer.parseInt(actionSeg[2]);
+		}
+		
 		if (action.equals("/writeBlog.do")) {
 			HttpSession session = request.getSession();
 			String loginID = (String) session.getAttribute("id");
@@ -53,7 +59,9 @@ public class blog extends HttpServlet {
 				out.print(request.getContextPath());
 				out.print("';</script>");
 			} else {
-				response.sendRedirect(request.getContextPath() + "/login.jsp");
+				out.print("<script>alert('로그인이 필요합니다.'); location.href='");
+				out.print(request.getContextPath());
+				out.print("/login.jsp';</script>");
 			}
 		}
 
@@ -77,16 +85,84 @@ public class blog extends HttpServlet {
 			HttpSession session = request.getSession();
 			String loginID = (String) session.getAttribute("id");
 			
-			if (loginID == null) {
-				out.print("<script>alert('로그인이 필요합니다.'); location.href='");
-				out.print(request.getContextPath());
-				out.print("/login.jsp';</script>");
-			} else {
+			if (loginID != null) {
 				BlogList = blogService.getmyBlogList(10, true, loginID);
 
 				request.setAttribute("BlogList", BlogList);
 				request.getRequestDispatcher("/myBlogList.jsp").forward(request, response);
+			} else {
+				out.print("<script>alert('로그인이 필요합니다.'); location.href='");
+				out.print(request.getContextPath());
+				out.print("/login.jsp';</script>");
 			}
+		}
+		
+		if (action2.equals("viewBlog")) {
+			BlogDTO.setBlogNum(blogId);
+			BlogDTO = blogService.getBlogInfo(BlogDTO);
+
+			request.setAttribute("BlogDTO", BlogDTO);
+			request.getRequestDispatcher("/viewBlog.jsp").forward(request, response);
+		}
+		
+		if (action2.equals("updateBlog")) {
+			HttpSession session = request.getSession();
+			String loginID = (String) session.getAttribute("id");
+			
+			if (loginID != null) {
+				BlogDTO.setBlogNum(blogId);
+				BlogDTO = blogService.getBlogInfo(BlogDTO);
+
+				if (loginID.equals(BlogDTO.getWriterID())) {
+					blogService.updateBlog(BlogDTO);
+
+					request.setAttribute("BlogDTO", BlogDTO);
+				} else {
+					out.print("<script>alert('글 작성자만 수정할 수 있습니다.'); location.href='");
+					out.print(request.getContextPath());
+					out.print("/blog/blogList.do';</script>");
+				}
+			} else {
+				out.print("<script>alert('로그인이 필요합니다.'); location.href='");
+				out.print(request.getContextPath());
+				out.print("/login.jsp';</script>");
+			}
+		}
+		
+		if (action2.equals("deleteBlog")) {
+			HttpSession session = request.getSession();
+			String loginID = (String) session.getAttribute("id");
+			
+			if (loginID != null) {
+				BlogDTO.setBlogNum(blogId);
+				BlogDTO = blogService.getBlogInfo(BlogDTO);
+
+				if (loginID.equals(BlogDTO.getWriterID())) {
+					blogService.deleteBlog(BlogDTO);
+
+					out.print("<script>alert('글이 삭제되었습니다.'); location.href='");
+					out.print(request.getContextPath());
+					out.print("/blog/myBlogList.do';</script>");
+				} else {
+					out.print("<script>alert('글 작성자만 삭제할 수 있습니다.'); location.href='");
+					out.print(request.getContextPath());
+					out.print("/blog/blogList.do';</script>");
+				}
+			} else {
+				out.print("<script>alert('로그인이 필요합니다.'); location.href='");
+				out.print(request.getContextPath());
+				out.print("/login.jsp';</script>");
+			}
+		}
+		
+		if (action2.equals("updateBlogReq")) {
+			BlogDTO.setBlogNum(blogId);
+			BlogDTO = blogService.getBlogInfo(BlogDTO);
+			
+			request.setAttribute("BlogDTO", BlogDTO);
+			request.getRequestDispatcher("/updateBlog.jsp").forward(request, response);
+			
+			
 		}
 	}
 }

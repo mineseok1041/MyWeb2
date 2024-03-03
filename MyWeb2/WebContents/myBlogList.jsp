@@ -37,6 +37,8 @@
 					<td>${blog.writer}</td>
 					<td><fmt:formatDate value="${blog.writeDate}"
 										pattern="yyyy-MM-dd" /></td>
+					<td><a href="${contextPath}/blog/updateBlogReq/${blog.blogNum}">수정</a></td>
+					<td><a href="${contextPath}/blog/deleteBlog/${blog.blogNum}">삭제</a></td>
 				</tr>
 			</c:forEach>
 			</c:if>

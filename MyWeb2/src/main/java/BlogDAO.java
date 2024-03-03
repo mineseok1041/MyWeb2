@@ -42,11 +42,6 @@ public class BlogDAO {
 			pstmt.setString(3, writer);
 			pstmt.setString(4, writerID);
 			pstmt.executeUpdate();
-			System.out.println("New blog added : ");
-			System.out.println("Title : " + title 
-							+ " Contents : " + contents
-							+ " Writer : " + writer
-							+ " WriterID : " + writerID);
 			
 			pstmt.close();
 			con.close();
@@ -73,6 +68,7 @@ public class BlogDAO {
 			BlogDTO.setContents(rs.getString("contents"));
 			BlogDTO.setWriter(rs.getString("writer"));
 			BlogDTO.setWriteDate(rs.getDate("writeDate"));
+			BlogDTO.setWriterID(rs.getString("writerID"));
 
 			rs.close();
 			pstmt.close();
@@ -99,8 +95,6 @@ public class BlogDAO {
 				query += " order by blogNum asc";
 			}
 			query += " ) where rownum <= ?";
-			
-			System.out.println(query);
 			
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, max);
@@ -144,8 +138,6 @@ public class BlogDAO {
 			}
 			query += " ) where rownum <= ?";
 			
-			System.out.println(query);
-			
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, max);
 		
@@ -172,6 +164,24 @@ public class BlogDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+	
+	public void deleteBlog(BlogDTO BlogDTO) {
+		int blogNum = BlogDTO.getBlogNum();
+
+		try {
+			con = dataFactory.getConnection();
+
+			String query = "delete from blog_t where blogNum=?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, blogNum);
+			pstmt.executeUpdate();
+
+			pstmt.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	

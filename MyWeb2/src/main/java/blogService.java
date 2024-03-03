@@ -28,4 +28,8 @@ public class blogService {
 	public BlogDTO getBlogInfo(BlogDTO BlogDTO) {
 		return BlogDAO.getBlogInfo(BlogDTO);
 	}
+	
+	public void deleteBlog(BlogDTO BlogDTO) {
+		BlogDAO.deleteBlog(BlogDTO);
+	}
 }
