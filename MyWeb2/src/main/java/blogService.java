@@ -32,4 +32,8 @@ public class blogService {
 	public void deleteBlog(BlogDTO BlogDTO) {
 		BlogDAO.deleteBlog(BlogDTO);
 	}
+	
+	public void updateBlog(BlogDTO BlogDTO) {
+		BlogDAO.updateBlog(BlogDTO);
+	}
 }

@@ -185,5 +185,27 @@ public class BlogDAO {
 		}
 	}
 	
+	public void updateBlog(BlogDTO BlogDTO) {
+		int blogNum = BlogDTO.getBlogNum();
+		String title = BlogDTO.getTitle();
+		String contents = BlogDTO.getContents();
+
+		try {
+			con = dataFactory.getConnection();
+
+			String query = "update blog_t set title=?, contents=? where blogNum=?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, title);
+			pstmt.setString(2, contents);
+			pstmt.setInt(3, blogNum);
+			pstmt.executeUpdate();
+
+			pstmt.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 }
