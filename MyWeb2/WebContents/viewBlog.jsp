@@ -18,12 +18,12 @@
 <body>
 
 <h1>${BlogDTO.title}</h1><br>
-작성자: ${BlogDTO.writer} ${BlogDTO.writeDate}
+작성자: ${BlogDTO.writer} ${BlogDTO.writeDate}<br>
+--------------------------------<br>
 
-<div class="contents">
-	${BlogDTO.contents}
-</div>
+<pre>${BlogDTO.contents}</pre>
 
+--------------------------------<br>
 
 <a href="${contextPath}/blog/blogList.do">목록으로</a>
 

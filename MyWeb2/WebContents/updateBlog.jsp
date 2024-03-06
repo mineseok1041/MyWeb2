@@ -9,6 +9,7 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:set var="loginID" value="${sessionScope.id}" />
+
 <c:set var="blogNum" value="${BlogDTO.blogNum}" />
 <c:set var="title" value="${BlogDTO.title}" />
 <c:set var="contents" value="${BlogDTO.contents}" />
