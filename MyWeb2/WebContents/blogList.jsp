@@ -7,6 +7,9 @@
 	request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="loginID" value="${sessionScope.id}" />
+
+<jsp:include page="header.jsp"></jsp:include>
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +20,6 @@
 </head>
 
 <body>
-	<h1>Blog List Page</h1>
 	<a href="${contextPath}">홈으로</a>
 	<table class="table">
 		<tr class="contype">
@@ -37,10 +39,12 @@
 					<td>${blog.writer}</td>
 					<td><fmt:formatDate value="${blog.writeDate}"
 										pattern="yyyy-MM-dd" /></td>
+					<c:if test="${loginID == 'admin'}">
+					    <td><a href="${contextPath}/blog/deleteBlog/${blog.blogNum}">삭제</a></td>
+					</c:if>
 				</tr>
-			</c:forEach>
+				</c:forEach>
 			</c:if>
-		</tr>
 	</table>
 	<form name="search" method="get" action="${contextPath}/blog/blogSearch.do">
 		<input type="search" name="search" placeholder="검색어를 입력하세요">

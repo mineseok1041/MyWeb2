@@ -36,13 +36,13 @@ public class blog extends HttpServlet {
 
 		String action = request.getPathInfo();
 		String[] actionSeg = action.split("/");
-		String action2 = (String)actionSeg[1];
+		action = (String)actionSeg[1];
 		int blogId = 0;
 		if (actionSeg.length == 3) {
 			blogId = Integer.parseInt(actionSeg[2]);
 		}
 		
-		if (action.equals("/writeBlog.do")) {
+		if (action.equals("writeBlog.do")) {
 			HttpSession session = request.getSession();
 			String loginID = (String) session.getAttribute("id");
 			String loginName = (String) session.getAttribute("name");
@@ -65,14 +65,14 @@ public class blog extends HttpServlet {
 			}
 		}
 
-		if (action.equals("/blogList.do")) {
+		if (action.equals("blogList.do")) {
 			BlogList = blogService.getBlogList(10, true, null);
 
 			request.setAttribute("BlogList", BlogList);
 			request.getRequestDispatcher("/blogList.jsp").forward(request, response);
 		}
 		
-		if (action.equals("/blogSearch.do")) {
+		if (action.equals("blogSearch.do")) {
 			String search = request.getParameter("search");
 			
             BlogList = blogService.getBlogList(100, true, search);
@@ -81,7 +81,7 @@ public class blog extends HttpServlet {
             request.getRequestDispatcher("/blogList.jsp").forward(request, response);
 		}
 		
-		if (action.equals("/myBlogList.do")) {
+		if (action.equals("myBlogList.do")) {
 			HttpSession session = request.getSession();
 			String loginID = (String) session.getAttribute("id");
 			
@@ -97,7 +97,7 @@ public class blog extends HttpServlet {
 			}
 		}
 		
-		if (action2.equals("viewBlog")) {
+		if (action.equals("viewBlog")) {
 			BlogDTO.setBlogNum(blogId);
 			BlogDTO = blogService.getBlogInfo(BlogDTO);
 
@@ -105,7 +105,7 @@ public class blog extends HttpServlet {
 			request.getRequestDispatcher("/viewBlog.jsp").forward(request, response);
 		}
 		
-		if (action.equals("/updateBlog.do")) {
+		if (action.equals("updateBlog.do")) {
 			BlogDTO.setBlogNum(Integer.parseInt(request.getParameter("blogNum")));
 			BlogDTO.setTitle(request.getParameter("title"));
 			BlogDTO.setContents(request.getParameter("contents"));
@@ -116,10 +116,10 @@ public class blog extends HttpServlet {
 			out.print("/blog/myBlogList.do';</script>");
 		}
 		
-		if (action2.equals("deleteBlog")) {
+		if (action.equals("deleteBlog")) {
 			HttpSession session = request.getSession();
 			String loginID = (String) session.getAttribute("id");
-			
+
 			if (loginID != null) {
 				BlogDTO.setBlogNum(blogId);
 				BlogDTO = blogService.getBlogInfo(BlogDTO);
@@ -127,9 +127,8 @@ public class blog extends HttpServlet {
 				if (loginID.equals(BlogDTO.getWriterID())) {
 					blogService.deleteBlog(BlogDTO);
 
-					out.print("<script>alert('글이 삭제되었습니다.'); location.href='");
-					out.print(request.getContextPath());
-					out.print("/blog/myBlogList.do';</script>");
+					
+					out.print("<script>alert('글이 삭제되었습니다.'); window.location=document.referrer;</script>");
 				} else {
 					out.print("<script>alert('글 작성자만 삭제할 수 있습니다.'); location.href='");
 					out.print(request.getContextPath());
@@ -142,7 +141,7 @@ public class blog extends HttpServlet {
 			}
 		}
 		
-		if (action2.equals("updateBlogReq")) {
+		if (action.equals("updateBlogReq")) {
 			HttpSession session = request.getSession();
 			String loginID = (String) session.getAttribute("id");
 			

@@ -15,7 +15,7 @@
 <c:set var="contents" value="${BlogDTO.contents}" />
 <c:set var="writerID" value="${BlogDTO.writerID}" />
 
-
+<jsp:include page="header.jsp"></jsp:include>
 
 <!DOCTYPE html>
 <html>

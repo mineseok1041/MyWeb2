@@ -12,17 +12,17 @@
 <c:url var="blogListUrl" value="/blog/blogList.do" />
 <c:url var="myBlogList" value="/blog/myBlogList.do" />
 
+<jsp:include page="header.jsp"></jsp:include>
+
 <!DOCTYPE html>
 <html>
 
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="qcss/index.css" />
 <title>Main page</title>
 </head>
 
 <body>
-	<h1>Main Page</h1>
 	
 	<!-- 로그인이 안되어 있을 때 -->
 	<c:if test="${empty id}">

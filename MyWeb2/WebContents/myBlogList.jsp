@@ -9,14 +9,16 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:set var="name" value="${sessionScope.name}" />
 
+<jsp:include page="header.jsp"></jsp:include>
+
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>My Blog List Page</title>
 </head>
 <body>
-	<h1>My Blog List Page</h1>
 	<a href="${contextPath}">홈으로</a>
 	${name}님의 블로그 목록
 	<table class="table">
@@ -48,6 +50,5 @@
 		<input type="search" name="search" placeholder="검색어를 입력하세요">
 		<input type="submit" value="검색">
 	</form>
-	 
 </body>
 </html>

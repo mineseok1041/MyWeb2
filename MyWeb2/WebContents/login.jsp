@@ -4,6 +4,8 @@
 
 <c:set var="LoginErr" value="${sessionScope.LoginErr}" />
 
+<jsp:include page="header.jsp"></jsp:include>
+
 <!DOCTYPE html>
 <html>
 
@@ -13,7 +15,6 @@
 </head>
 
 <body>
-	<h3><u>Login Page</u></h3>
 	<div>
 		<form name="login" method="post" action="member/login.do">
 			<table>
