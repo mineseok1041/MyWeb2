@@ -1,3 +1,5 @@
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,8 +11,7 @@ public class memberService {
 	
 	public MemberDTO Login(MemberDTO MemberDTO) {
 		if (MemberDAO.isExisted(MemberDTO)) {
-			System.out.println(MemberDTO.getId() + " " + MemberDTO.getPw() + "로 로그인");
-			return MemberDAO.getMemberInfo(MemberDTO.getId());
+			return MemberDAO.getMemberInfo(MemberDTO);
 		} else {
 			return null;
 		}
@@ -19,7 +20,6 @@ public class memberService {
 	public void Logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		System.out.println("로그아웃");
 	}
 	
 	public void SignUp(MemberDTO MemberDTO) {
@@ -29,5 +29,13 @@ public class memberService {
 	public boolean isValidID(MemberDTO MemberDTO) {
 		boolean result = MemberDAO.isExisted(MemberDTO);
 		return !result;
+	}
+	
+	public List<MemberDTO> getMemberList(MemberDTO MemberDTO) {
+		return MemberDAO.listMembers();
+	}
+	
+	public void delMember(MemberDTO MemberDTO) {
+		MemberDAO.delMember(MemberDTO);
 	}
 }

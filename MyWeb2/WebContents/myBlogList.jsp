@@ -19,8 +19,8 @@
 <title>My Blog List Page</title>
 </head>
 <body>
+	<h3>${name}님의 블로그 목록</h3>
 	<a href="${contextPath}">홈으로</a>
-	${name}님의 블로그 목록
 	<table class="table">
 		<tr class="contype">
 			<td class="title" width="400px">제목</td>

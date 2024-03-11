@@ -20,7 +20,7 @@
 </head>
 
 <body>
-	<a href="${contextPath}">홈으로</a>
+    <a href="${contextPath}">홈으로</a>
 	<table class="table">
 		<tr class="contype">
 			<td class="title" width="400px">제목</td>

@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,10 +32,14 @@ public class member extends HttpServlet {
 		memberService mbService = new memberService();
 		MemberDTO MemberDTO = new MemberDTO();
 		
+		HttpSession session = request.getSession();
+		String loginID = (String) session.getAttribute("id");
+		
+		PrintWriter out = response.getWriter();
+		
 		String action = request.getPathInfo();
 		
 		if (action.equals("/login.do")) {
-			HttpSession session = request.getSession();
 			
 			MemberDTO.setId(request.getParameter("id"));
 			MemberDTO.setPw(request.getParameter("pw"));
@@ -45,15 +51,13 @@ public class member extends HttpServlet {
 				
 				response.sendRedirect(request.getContextPath());
 			} else {
-				System.out.println("로그인 실패");
-				session.setAttribute("LoginErr", "true");
-				response.sendRedirect(request.getContextPath() + "/login.jsp");
+				request.setAttribute("LoginErr", "true");
+				request.getRequestDispatcher("/login.jsp").forward(request, response);
 			}
 		}
 		
 		if (action.equals("/logout.do")) {
 			mbService.Logout(request);
-			System.out.println("로그아웃");
 			response.sendRedirect(request.getContextPath());
 		}
 		
@@ -64,7 +68,7 @@ public class member extends HttpServlet {
 			MemberDTO.setEmail(request.getParameter("email"));
 
 			mbService.SignUp(MemberDTO);
-			PrintWriter out = response.getWriter();
+			
 			out.print("<script>alert('회원가입 되었습니다.'); location.href='");
 			out.print(request.getContextPath());
 			out.print("';</script>");
@@ -72,7 +76,6 @@ public class member extends HttpServlet {
 		
 		if (action.equals("/isValidID.do")) {
 			MemberDTO.setId(request.getParameter("id"));
-			System.out.println(MemberDTO.getId());
 			
             boolean IDresult = mbService.isValidID(MemberDTO);
             
@@ -82,5 +85,30 @@ public class member extends HttpServlet {
 				response.getWriter().print("invalid");
 			}
         }
+		
+		if (action.equals("/memberList.do")) {
+			List<MemberDTO> memberList = mbService.getMemberList(MemberDTO);
+			
+			request.setAttribute("BlogList", memberList);
+			request.getRequestDispatcher("/memberList.jsp").forward(request, response);
+		}
+		
+		if (action.equals("/delMember.do")) {
+			MemberDTO.setId(request.getParameter("id"));
+			
+			if (loginID == "admin") {
+				mbService.delMember(MemberDTO);
+				
+				out.print("<script>alert('회원 삭제되었습니다.'); location.href='");
+				out.print(request.getContextPath());
+				out.print("';</script>");
+			} else {
+				out.print("<script>alert('관리자만 삭제 가능합니다.'); location.href='");
+				out.print(request.getContextPath());
+				out.print("';</script>");
+			}
+            
+            
+		}
 	}
 }

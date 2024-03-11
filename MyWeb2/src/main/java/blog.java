@@ -66,7 +66,7 @@ public class blog extends HttpServlet {
 		}
 
 		if (action.equals("blogList.do")) {
-			BlogList = blogService.getBlogList(10, true, null);
+			BlogList = blogService.getBlogList(100, true, null);
 
 			request.setAttribute("BlogList", BlogList);
 			request.getRequestDispatcher("/blogList.jsp").forward(request, response);

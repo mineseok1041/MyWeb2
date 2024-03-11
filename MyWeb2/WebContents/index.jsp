@@ -11,6 +11,7 @@
 <c:url var="writeBlogUrl" value="/writeBlog.jsp" />
 <c:url var="blogListUrl" value="/blog/blogList.do" />
 <c:url var="myBlogList" value="/blog/myBlogList.do" />
+<c:url var="memberList" value="/member/memberList.do" />
 
 <jsp:include page="header.jsp"></jsp:include>
 
@@ -37,8 +38,10 @@
         <a href="${writeBlogUrl}">글쓰기</a>
 		<a href="${logoutUrl}">로그아웃</a><br>
 		<a href="${blogListUrl}">블로그 목록</a>
-		<a href="${myBlogList}">내 블로그 목록</a>
+		<a href="${myBlogList}">내 블로그 목록</a><br>
+		<c:if test="${id == 'admin'}">
+			<a href="${memberList}">회원 목록</a>
+		</c:if>
 	</c:if>
 </body>
-
 </html>

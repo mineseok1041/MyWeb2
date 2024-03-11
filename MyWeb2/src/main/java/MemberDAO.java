@@ -30,13 +30,14 @@ public class MemberDAO {
 		List<MemberDTO> list = new ArrayList<MemberDTO>();
 		try {
 			con = dataFactory.getConnection();
-			MemberDTO MemberDTO = new MemberDTO();
+			
 			
 			String query = "select * from MyWebUser_t ";
 			pstmt = con.prepareStatement(query);
 			ResultSet rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
+				MemberDTO MemberDTO = new MemberDTO();
 				MemberDTO.setId(rs.getString("id"));
 				MemberDTO.setPw(rs.getString("pw"));
 				MemberDTO.setName(rs.getString("name"));
@@ -49,10 +50,12 @@ public class MemberDAO {
 			rs.close();
 			pstmt.close();
 			con.close();
+			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-		return list;
+		
 	}
 	
 	public void addMember(MemberDTO memberDTO) {
@@ -74,7 +77,6 @@ public class MemberDAO {
 			pstmt.setString(3, name);
 			pstmt.setString(4, email);
 			pstmt.executeUpdate();
-			System.out.println("addmember : " + id + " " + pw +  " " + name +  " " + email);
 			
 			pstmt.close();
 		} catch (Exception e) {
@@ -82,7 +84,9 @@ public class MemberDAO {
 		}
 	}
 	
-	public void delMember(String id) {
+	public void delMember(MemberDTO memberDTO) {
+		String id = memberDTO.getId();
+		
 		try {
 			con = dataFactory.getConnection();
 			
@@ -132,10 +136,11 @@ public class MemberDAO {
 		return result;
 	}
 	
-	public MemberDTO getMemberInfo(String id) {
-		MemberDTO MemberDTO = new MemberDTO();
+	public MemberDTO getMemberInfo(MemberDTO memberDTO) {
+		String id = memberDTO.getId();
 		
         try {
+        	MemberDTO MemberDTO = new MemberDTO();
             con = dataFactory.getConnection();
             
             String query = "select * from MyWebUser_t where id=?";

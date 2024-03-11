@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:set var="LoginErr" value="${sessionScope.LoginErr}" />
+<c:set var="LoginErr" value="${requestScope.LoginErr}" />
 
 <jsp:include page="header.jsp"></jsp:include>
 
@@ -31,7 +31,7 @@
 		</form>
 	</div>
 	<div>
-		<c:if test="${LoginErr=='true'}">
+		<c:if test="${LoginErr =='true'}">
 			아이디 또는 비밀번호가 틀렸습니다.
 		</c:if>
 	</div>
