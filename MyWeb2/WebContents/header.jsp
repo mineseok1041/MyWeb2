@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="/favicon1.ico">
+
 <title>Header Page</title>
 </head>
 <body>

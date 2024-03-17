@@ -19,12 +19,13 @@
 <html>
 
 <head>
+<link rel="icon" href="/favicon2.ico">
+
 <meta charset="UTF-8">
 <title>Main page</title>
 </head>
 
 <body>
-	
 	<!-- 로그인이 안되어 있을 때 -->
 	<c:if test="${empty id}">
 		<a href="${loginUrl}">로그인</a>
@@ -39,6 +40,8 @@
 		<a href="${logoutUrl}">로그아웃</a><br>
 		<a href="${blogListUrl}">블로그 목록</a>
 		<a href="${myBlogList}">내 블로그 목록</a><br>
+		
+		<!-- 관리자일 때 -->
 		<c:if test="${id == 'admin'}">
 			<a href="${memberList}">회원 목록</a>
 		</c:if>

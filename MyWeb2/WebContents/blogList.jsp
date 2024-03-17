@@ -17,6 +17,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Blog List Page</title>
+<link rel="stylesheet" type="text/css" href="css/blogList.css">
 </head>
 
 <body>
@@ -34,18 +35,32 @@
 
 			<c:if test="${not empty BlogList}">
 				<c:forEach items="${BlogList}" var="blog">
-				<tr>
-					<td><a href="${contextPath}/blog/viewBlog/${blog.blogNum}">${blog.title}</a></td>
-					<td>${blog.writer}</td>
-					<td><fmt:formatDate value="${blog.writeDate}"
-										pattern="yyyy-MM-dd" /></td>
-					<c:if test="${loginID == 'admin'}">
-					    <td><a href="${contextPath}/blog/deleteBlog/${blog.blogNum}">삭제</a></td>
-					</c:if>
-				</tr>
+					<tr>
+						<td><a href="${contextPath}/blog/viewBlog/${blog.blogNum}">${blog.title}</a></td>
+						<td>${blog.writer}</td>
+						<td><fmt:formatDate value="${blog.writeDate}" pattern="yyyy-MM-dd" /></td>
+					
+						<c:if test="${loginID == 'admin'}">
+					    	<td><a href="${contextPath}/blog/deleteBlog/${blog.blogNum}">삭제</a></td>
+						</c:if>
+					</tr>
 				</c:forEach>
 			</c:if>
 	</table>
+	<c:if test="${loginID != null}">
+		<a href="${contextPath}/blog/writeBlog.do">글쓰기</a>
+	</c:if>
+	
+	<div>
+		<a href=""><<</a>
+		<a href="">1</a>
+		<a href="">2</a>
+		<a href="">3</a>
+		<a href="">4</a>
+		<a href="">5</a>
+		<a href="">>></a>
+	</div>
+	
 	<form name="search" method="get" action="${contextPath}/blog/blogSearch.do">
 		<input type="search" name="search" placeholder="검색어를 입력하세요">
 		<input type="submit" value="검색">
