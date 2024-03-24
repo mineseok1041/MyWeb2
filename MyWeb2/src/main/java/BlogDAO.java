@@ -81,23 +81,26 @@ public class BlogDAO {
 		}
 	}
 	
-	public List<BlogDTO> getBlogList(int max, boolean isDesc, String search) {
+	public List<BlogDTO> getBlogList(int num, int page, boolean isDesc, String search) {
 		try {
 			con = dataFactory.getConnection();
 
-			String query = "select * from ( select * from blog_t";
+			String query = "select * from ( select ROWNUM NUM, blog_t.* from blog_t";
+			
 			if (search != null) {
 				query += " where (title||contents||writer) like '%" + search + "%'";
 			}
+			
 			if (isDesc) {
 				query += " order by blogNum desc";
 			} else {
 				query += " order by blogNum asc";
 			}
-			query += " ) where rownum <= ?";
+			query += " ) where NUM between ? and ?";
 			
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, max);
+			pstmt.setInt(1, (page - 1) * num + 1);
+			pstmt.setInt(2, page * num);
 		
 			ResultSet rs = pstmt.executeQuery();
 

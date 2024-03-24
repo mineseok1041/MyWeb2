@@ -34,15 +34,15 @@
 
 			<c:if test="${not empty BlogList}">
 				<c:forEach items="${BlogList}" var="blog">
-				<tr>
-					<td><a href="${contextPath}/blog/viewBlog/${blog.blogNum}">${blog.title}</a></td>
-					<td>${blog.writer}</td>
-					<td><fmt:formatDate value="${blog.writeDate}"
-										pattern="yyyy-MM-dd" /></td>
-					<td><a href="${contextPath}/blog/updateBlogReq/${blog.blogNum}">수정</a></td>
-					<td><a href="${contextPath}/blog/deleteBlog/${blog.blogNum}">삭제</a></td>
-				</tr>
-			</c:forEach>
+					<tr>
+						<td><a href="${contextPath}/blog/viewBlog/${blog.blogNum}">${blog.title}</a></td>
+						<td>${blog.writer}</td>
+						<td><fmt:formatDate value="${blog.writeDate}"
+											pattern="yyyy-MM-dd" /></td>
+						<td><a href="${contextPath}/blog/updateBlogReq/${blog.blogNum}">수정</a></td>
+						<td><a href="${contextPath}/blog/deleteBlog/${blog.blogNum}">삭제</a></td>
+					</tr>
+				</c:forEach>
 			</c:if>
 		</tr>
 	</table>

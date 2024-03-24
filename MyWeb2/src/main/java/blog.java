@@ -26,6 +26,7 @@ public class blog extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -66,16 +67,26 @@ public class blog extends HttpServlet {
 		}
 
 		if (action.equals("blogList.do")) {
-			BlogList = blogService.getBlogList(100, true, null);
+			int page = 1;
+			if (request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+			}
+			
+			BlogList = blogService.getBlogList(10, page ,true, null);
 
+			request.setAttribute("page", page);
 			request.setAttribute("BlogList", BlogList);
 			request.getRequestDispatcher("/blogList.jsp").forward(request, response);
 		}
 		
 		if (action.equals("blogSearch.do")) {
+			int page = 1;
+			if (request.getParameter("page") != null) {
+				page = Integer.parseInt(request.getParameter("page"));
+			}
 			String search = request.getParameter("search");
 			
-            BlogList = blogService.getBlogList(100, true, search);
+            BlogList = blogService.getBlogList(10, page, true, search);
             
             request.setAttribute("BlogList", BlogList);
             request.getRequestDispatcher("/blogList.jsp").forward(request, response);

@@ -4,10 +4,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%
-	request.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("UTF-8");
+
+    String Strpage = request.getParameter("page");
+    int pageNum = 1;
+    if (Strpage != null) {
+		pageNum = Integer.parseInt(Strpage);
+	}
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:set var="loginID" value="${sessionScope.id}" />
+
 
 <jsp:include page="header.jsp"></jsp:include>
 
@@ -17,7 +24,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Blog List Page</title>
-<link rel="stylesheet" type="text/css" href="css/blogList.css">
 </head>
 
 <body>
@@ -47,18 +53,38 @@
 				</c:forEach>
 			</c:if>
 	</table>
+	
+	<%--
 	<c:if test="${loginID != null}">
-		<a href="${contextPath}/blog/writeBlog.do">글쓰기</a>
+	<a href="${contextPath}/blog/writeBlog.do">글쓰기</a>
 	</c:if>
+	 --%>
+	
+	
 	
 	<div>
-		<a href=""><<</a>
-		<a href="">1</a>
-		<a href="">2</a>
-		<a href="">3</a>
-		<a href="">4</a>
-		<a href="">5</a>
-		<a href="">>></a>
+		<c:if test="${pageNum >= 3}" >
+			<a href="${contextPath}/blog/blogList.do?page=1">prev</a>
+			<a href="${contextPath}/blog/blogList.do?page=${pageNum}">${pageNum}</a>
+			<a href="${contextPath}/blog/blogList.do?page=${pageNum+1}">${pageNum+1}</a>
+			<a href="${contextPath}/blog/blogList.do?page=${pageNum+2}">${pageNum+2}</a>
+			<a href="${contextPath}/blog/blogList.do?page=${pageNum+3}">${pageNum+3}</a>
+			<a href="${contextPath}/blog/blogList.do?page=${pageNum+4}">${pageNum+4}</a>
+		</c:if>
+	    <c:if test="${pageNum < 3}" >
+	    	<a href="${contextPath}/blog/blogList.do?page=1">prev</a>
+			<a href="${contextPath}/blog/blogList.do?page=1">1</a>
+			<a href="${contextPath}/blog/blogList.do?page=2">2</a>
+			<a href="${contextPath}/blog/blogList.do?page=3">3</a>
+			<a href="${contextPath}/blog/blogList.do?page=4">4</a>
+			<a href="${contextPath}/blog/blogList.do?page=5">5</a>
+	    </c:if>
+	    <a href="${contextPath}/blog/blogList.do?page=1">prev</a>
+		<a href="${contextPath}/blog/blogList.do?page=${pageNum}">${pageNum}</a>
+		<a href="${contextPath}/blog/blogList.do?page=${pageNum+1}">${pageNum+1}</a>
+		<a href="${contextPath}/blog/blogList.do?page=${pageNum+2}">${pageNum+2}</a>
+		<a href="${contextPath}/blog/blogList.do?page=${pageNum+3}">${pageNum+3}</a>
+		<a href="${contextPath}/blog/blogList.do?page=${pageNum+4}">${pageNum+4}</a>
 	</div>
 	
 	<form name="search" method="get" action="${contextPath}/blog/blogSearch.do">
