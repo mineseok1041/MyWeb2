@@ -1,4 +1,4 @@
---Å×ÀÌºí »ý¼º
+--Ã…Ã—Ã€ÃŒÂºÃ­ Â»Ã½Â¼Âº
 create table MyWebUser_t(
     id varchar2(20) primary key,
     pwd varchar2(20),
