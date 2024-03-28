@@ -161,11 +161,12 @@ public class blog extends HttpServlet {
 			if (loginID != null) {
 				BlogDTO.setBlogNum(blogId);
 				BlogDTO = blogService.getBlogInfo(BlogDTO);
+				String writerID = BlogDTO.getWriterID();
+				System.out.println(writerID);
 
 				if (loginID.equals(BlogDTO.getWriterID())) {
 					request.setAttribute("BlogDTO", BlogDTO);
 					request.getRequestDispatcher("/updateBlog.jsp").forward(request, response);
-					
 				} else {
 					out.print("<script>alert('글 작성자만 수정할 수 있습니다.'); location.href='");
 					out.print(request.getContextPath());

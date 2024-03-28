@@ -19,7 +19,7 @@
 <html>
 
 <head>
-<link rel="icon" href="/favicon2.ico">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
 
 <meta charset="UTF-8">
 <title>Main page</title>
@@ -35,7 +35,7 @@
 	
 	<!-- 로그인이 되어 있을 때 -->
 	<c:if test="${not empty id}">
-        ${name}님 환영합니다.<br>
+        <h3>${name}님 환영합니다.<br></h3>
         <a href="${writeBlogUrl}">글쓰기</a>
 		<a href="${logoutUrl}">로그아웃</a><br>
 		<a href="${blogListUrl}">블로그 목록</a>

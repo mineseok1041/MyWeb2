@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="/favicon1.ico">
+<link rel="icon" href="./image/favicon.png" type="image/x-icon">
 
-<title>Header Page</title>
+<title>MyWeb2</title>
 </head>
 <body>
 	<h1><a href="${pageContext.request.contextPath}" class="header">MyWeb2</a></h1>
