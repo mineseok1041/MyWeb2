@@ -8,6 +8,15 @@
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:set var="name" value="${sessionScope.name}" />
+<c:set var="search" value="${requestScope.search}" />
+
+<c:set var="page" value="${requestScope.page}" />
+<c:if test="${page == null}">
+	<c:set var="page" value="1" />
+</c:if>
+<c:if test="${page != null}">
+    <fmt:parseNumber var="pageNum" value="${page}" />
+</c:if>
 
 <jsp:include page="header.jsp"></jsp:include>
 
@@ -46,9 +55,48 @@
 			</c:if>
 		</tr>
 	</table>
-	<form name="search" method="get" action="${contextPath}/blog/myblogSearch.do">
-		<input type="search" name="search" placeholder="검색어를 입력하세요">
+	<form name="search" method="get" action="${contextPath}/blog/myBlogList.do">
+		<input type="search" name="search" placeholder="검색어를 입력하세요" value="${search}">
 		<input type="submit" value="검색">
 	</form>
+	
+	<div>
+		<c:if test="${pageNum+0 < 3}">
+			<c:if test="${search != null}">
+				<a href="${contextPath}/blog/myBlogList.do?page=1&search=${search}">prev</a>
+				<a href="${contextPath}/blog/myBlogList.do?page=1&search=${search}">1</a>
+				<a href="${contextPath}/blog/myBlogList.do?page=2&search=${search}">2</a>
+				<a href="${contextPath}/blog/myBlogList.do?page=3&search=${search}">3</a>
+				<a href="${contextPath}/blog/myBlogList.do?page=4&search=${search}">4</a>
+				<a href="${contextPath}/blog/myBlogList.do?page=5&search=${search}">5</a>
+			</c:if>
+			<c:if test="${search == null}">
+				<a href="${contextPath}/blog/myBlogList.do?page=1">prev</a>
+				<a href="${contextPath}/blog/myBlogList.do?page=1">1</a>
+				<a href="${contextPath}/blog/myBlogList.do?page=2">2</a>
+				<a href="${contextPath}/blog/myBlogList.do?page=3">3</a>
+				<a href="${contextPath}/blog/myBlogList.do?page=4">4</a>
+				<a href="${contextPath}/blog/myBlogList.do?page=5">5</a>
+			</c:if>
+		</c:if>
+		<c:if test="${pageNum+0 > 2}">
+			<c:if test="${search != null}">
+                <a href="${contextPath}/blog/myBlogList.do?page=1&search=${search}">prev</a>
+                <a href="${contextPath}/blog/myBlogList.do?page=${pageNum-2}&search=${search}">${pageNum-2}</a>
+                <a href="${contextPath}/blog/myBlogList.do?page=${pageNum-1}&search=${search}">${pageNum-1}</a>
+                <a href="${contextPath}/blog/myBlogList.do?page=${pageNum+0}&search=${search}">${pageNum+0}</a>
+                <a href="${contextPath}/blog/myBlogList.do?page=${pageNum+1}&search=${search}">${pageNum+1}</a>
+                <a href="${contextPath}/blog/myBlogList.do?page=${pageNum+2}&search=${search}">${pageNum+2}</a>
+            </c:if>
+			<c:if test="${search == null}">
+				<a href="${contextPath}/blog/myBlogList.do?page=1&search=${search}">prev</a>
+				<a href="${contextPath}/blog/myBlogList.do?page=${pageNum-2}">${pageNum-2}</a>
+				<a href="${contextPath}/blog/myBlogList.do?page=${pageNum-1}">${pageNum-1}</a>
+				<a href="${contextPath}/blog/myBlogList.do?page=${pageNum+0}">${pageNum+0}</a>
+				<a href="${contextPath}/blog/myBlogList.do?page=${pageNum+1}">${pageNum+1}</a>
+				<a href="${contextPath}/blog/myBlogList.do?page=${pageNum+2}">${pageNum+2}</a>
+			</c:if>
+		</c:if>
+	</div>
 </body>
 </html>

@@ -36,7 +36,6 @@ public class member extends HttpServlet {
 		String loginID = (String) session.getAttribute("id");
 		
 		PrintWriter out = response.getWriter();
-		
 		String action = request.getPathInfo();
 		
 		if (action.equals("/login.do")) {
@@ -107,8 +106,6 @@ public class member extends HttpServlet {
 				out.print(request.getContextPath());
 				out.print("';</script>");
 			}
-            
-            
 		}
 	}
 }

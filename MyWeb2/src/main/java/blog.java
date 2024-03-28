@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -71,25 +70,17 @@ public class blog extends HttpServlet {
 			if (request.getParameter("page") != null) {
 				page = Integer.parseInt(request.getParameter("page"));
 			}
-			
-			BlogList = blogService.getBlogList(10, page ,true, null);
+			if (request.getParameter("search") != null) {
+				String search = request.getParameter("search");
+				BlogList = blogService.getBlogList(10, page, true, search);
+			} else {
+				BlogList = blogService.getBlogList(10, page, true, null);
+			}
 
 			request.setAttribute("page", page);
 			request.setAttribute("BlogList", BlogList);
+			request.setAttribute("search", request.getParameter("search"));
 			request.getRequestDispatcher("/blogList.jsp").forward(request, response);
-		}
-		
-		if (action.equals("blogSearch.do")) {
-			int page = 1;
-			if (request.getParameter("page") != null) {
-				page = Integer.parseInt(request.getParameter("page"));
-			}
-			String search = request.getParameter("search");
-			
-            BlogList = blogService.getBlogList(10, page, true, search);
-            
-            request.setAttribute("BlogList", BlogList);
-            request.getRequestDispatcher("/blogList.jsp").forward(request, response);
 		}
 		
 		if (action.equals("myBlogList.do")) {
@@ -97,9 +88,20 @@ public class blog extends HttpServlet {
 			String loginID = (String) session.getAttribute("id");
 			
 			if (loginID != null) {
-				BlogList = blogService.getmyBlogList(100, true, loginID);
+				int page = 1;
+				if (request.getParameter("page") != null) {
+					page = Integer.parseInt(request.getParameter("page"));
+				}
+				if (request.getParameter("search") != null) {
+					String search = request.getParameter("search");
+					BlogList = blogService.getmyBlogList(10, page, true, loginID, search);
+				} else {
+					BlogList = blogService.getmyBlogList(10, page, true, loginID, null);
+				}
 
+				request.setAttribute("page", page);
 				request.setAttribute("BlogList", BlogList);
+				request.setAttribute("search", request.getParameter("search"));
 				request.getRequestDispatcher("/myBlogList.jsp").forward(request, response);
 			} else {
 				out.print("<script>alert('로그인이 필요합니다.'); location.href='");
