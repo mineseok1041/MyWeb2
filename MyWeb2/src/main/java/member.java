@@ -95,7 +95,7 @@ public class member extends HttpServlet {
 		if (action.equals("/delMember.do")) {
 			MemberDTO.setId(request.getParameter("id"));
 			
-			if (loginID == "admin") {
+			if (loginID.equals("admin")) {
 				mbService.delMember(MemberDTO);
 				
 				out.print("<script>alert('회원 삭제되었습니다.'); location.href='");
